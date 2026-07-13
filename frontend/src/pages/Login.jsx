@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import api from '../api';
 
@@ -7,26 +7,31 @@ function Login() {
     const [password, setpassword] = useState('');
     const navigate = useNavigate();
 
+    useEffect (()=>{
+        const token = localStorage.getItem('access_key');
+        if (token) {
+            navigate('/dashboard');
+        }
+    }, [navigate]);
+    const handleLogin = async (e) => {
+    e.preventDefault();
+
+    try {
+    const response = await api.post('token/', {
+        username: username,
+        password: password
+    });
+
+    console.log('the users username is: ', username);
+    console.log('the users password is: ', password);
     
-        const handleLogin = async (e) => {
-        e.preventDefault();
-
-        try {
-        const response = await api.post('token/', {
-            username: username,
-            password: password
-        });
-
-        console.log('the users username is: ', username);
-        console.log('the users password is: ', password);
-        
-        localStorage.setItem('access_key', response.data.access);
-        localStorage.setItem('refresh_key', response.data.refresh);
-        alert("Login successful, open devtools");
-        
-        // Redirect to the dashboard!
-        navigate('/dashboard');
-        
+    localStorage.setItem('access_key', response.data.access);
+    localStorage.setItem('refresh_key', response.data.refresh);
+    alert("Login successful, open devtools");
+    
+    // Redirect to the dashboard!
+    navigate('/dashboard');
+    
     }
     catch(error){
         alert('Login failed the error is',error);

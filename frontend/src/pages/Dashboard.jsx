@@ -2,6 +2,7 @@ import { useState, useEffect, use } from "react";
 import api from '../api';
 import { useNavigate } from "react-router-dom";
 import IssueModal from "../components/IssueModal";
+import ProjectModal from "../components/ProjectModal";
 
 function Dashboard() { 
 
@@ -9,6 +10,7 @@ function Dashboard() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [issues, setIssues] = useState([]);
     const navigate = useNavigate();
+    const [isProjectModalOpen, setIsProjectModalOpen] = useState(false);
     useEffect(() => {
         fetchProjects();
         fetchIssues();
@@ -56,15 +58,27 @@ function Dashboard() {
     };
     return(
         <div className="dash-container">
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
                 <h1 className="dash-header" style={{ margin: 0 }}>Jira-Lite Dashboard</h1>
-                <button 
-                    onClick={handleLogout}
-                    style={{ padding: '8px 16px', background: '#fee2e2', color: '#ef4444', border: 'none', borderRadius: '5px', cursor: 'pointer', fontWeight: 'bold' }}
-                >
-                    Logout
-                </button>
-            </div>            
+                
+                {/* Wrap the buttons in a div so they sit next to each other */}
+                <div style={{ display: 'flex', gap: '10px' }}>
+                    <button 
+                        onClick={() => setIsProjectModalOpen(true)}
+                        style={{ padding: '8px 16px', background: '#dbeafe', color: '#3b82f6', border: 'none', borderRadius: '5px', cursor: 'pointer', fontWeight: 'bold' }}
+                    >
+                        New Project
+                    </button>
+
+                    <button 
+                        onClick={handleLogout}
+                        style={{ padding: '8px 16px', background: '#fee2e2', color: '#ef4444', border: 'none', borderRadius: '5px', cursor: 'pointer', fontWeight: 'bold' }}
+                    >
+                        Logout
+                    </button>
+                </div>
+            </div>    
+           
             <div className="dash-grid">
                 {issues.map((issue) => (
                     <div key={issue.id} className="dash-card" style={{ borderLeft: '2px solid #eab308' }}>
@@ -91,6 +105,7 @@ function Dashboard() {
             </div>
 
             {isModalOpen && <IssueModal projects={projects} onClose = {() =>setIsModalOpen(false)}/>}
+            {isProjectModalOpen && <ProjectModal onClose={() => setIsProjectModalOpen(false)} />}
             <button 
             className="fab-button"
             onClick={() => setIsModalOpen(!isModalOpen)}>
