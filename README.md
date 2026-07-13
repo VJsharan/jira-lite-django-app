@@ -21,7 +21,7 @@ Jira Lite is a modern, lightweight issue-tracking application built with a power
 <img src="frontend/src/assets/newlogin.png" alt="Login Screen" width="800"/>
 
 ### 2. Dashboard & Project Overview
-<img src="frontend/src/assets/newdashboard.png" alt="Dashboard" width="800"/>
+<img src="frontend/src/assets/verynew.png" alt="Dashboard" width="800"/>
 
 ### 3. Project Details
 <img src="frontend/src/assets/Screenshot 2026-07-13 at 3.47.29 PM.png" alt="Project Details" width="800"/>
