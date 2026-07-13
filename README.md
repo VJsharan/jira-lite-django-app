@@ -15,6 +15,22 @@ Jira Lite is a modern, lightweight issue-tracking application built with a power
 
 ---
 
+## 📸 Screenshots
+
+### 1. Secure User Login
+<img src="frontend/src/assets/Screenshot 2026-07-13 at 3.46.02 PM.png" alt="Login Screen" width="800"/>
+
+### 2. Dashboard & Project Overview
+<img src="frontend/src/assets/Screenshot 2026-07-13 at 3.46.37 PM.png" alt="Dashboard" width="800"/>
+
+### 3. Project Details
+<img src="frontend/src/assets/Screenshot 2026-07-13 at 3.47.29 PM.png" alt="Project Details" width="800"/>
+
+### 4. Issue Creation
+<img src="frontend/src/assets/Screenshot 2026-07-13 at 3.47.41 PM.png" alt="Create Issue Modal" width="800"/>
+
+---
+
 ## 🛠 Tech Stack
 
 ### Backend
