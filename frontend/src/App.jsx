@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import ProjectDetails from './pages/ProjectDetails';
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
   return (
@@ -9,9 +10,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path ="/project/:id" element={<ProjectDetails/>} />
-      </Routes>
+        <Route path="/dashboard" element={<ProtectedRoute><Dashboard/></ProtectedRoute>} />
+        <Route path ="/project/:id" element={<ProtectedRoute><ProjectDetails/></ProtectedRoute>} />
+<Route path="*" element={<Navigate to="/login" replace />} />      </Routes>
     </Router>
   )
 }

@@ -12,6 +12,8 @@ class ProjectViewSet(viewsets.ModelViewSet):
 class IssueViewSet(viewsets.ModelViewSet):
     queryset = Issue.objects.all()
     serializer_class = IssueSerializer
+    def perform_create(self, serializer):
+        serializer.save(reporter=self.request.user)       
 
 class CommentViewSet(viewsets.ModelViewSet):
     queryset=Comment.objects.all()

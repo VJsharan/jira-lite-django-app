@@ -87,10 +87,11 @@ body {
   color: var(--text-main);
   font-weight: 800;
   letter-spacing: -1px;
+  transition: all 0.3s ease;
 }
 .dash-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; margin-top: 30px; }
 .dash-card {
-  background: white;
+  background: rgba(0, 0, 0, 0.039);
   padding: 28px;
   border-radius: 12px;
   border: 1px solid var(--border-color);
@@ -99,8 +100,57 @@ body {
   cursor: pointer;
 }
 .dash-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-5px); /* This makes the card float up slightly */
+  box-shadow: 0 0 20px rgba(234, 179, 8, 0.6); /* This is the yellow glow */
+  border-color: #eab308;
 }
-.dash-card h3 { color: #1e293b; margin-top: 0; font-size: 20px; margin-bottom: 12px;}
+.dash-card h3 { color: #000000; margin-top: 0; font-size: 20px; margin-bottom: 12px;}
 .dash-card p { color: var(--text-muted); margin: 0; line-height: 1.5; font-size: 15px;}
+
+.fab-button {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+  color: white;
+  border: none;
+  font-size: 32px;
+  font-weight: 300;
+  cursor: pointer;
+  box-shadow: 0 10px 30px -10px rgba(37, 99, 235, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  z-index: 1000;
+}
+
+.fab-button:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 15px 35px -10px rgba(37, 99, 235, 0.6);
+}
+
+/* Modal Overlay (The dark background) */
+.modal_overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+/* Modal Content (The white box) */
+.modal_content {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+

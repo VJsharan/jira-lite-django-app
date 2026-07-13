@@ -6,7 +6,10 @@ A lightweight issue tracking system built with Django and React (Vite).
 
 - Project Management
 - Bug/Issue Tracking
-- User Dashboard
+- User Dashboard with Issue Overview
+- Protected Routes & JWT Authentication
+- Issue Creation via Modal
+- User Logout Functionality
 
 ## Tech Stack
 

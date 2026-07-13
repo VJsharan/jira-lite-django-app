@@ -24,10 +24,37 @@ function ProjectDetails(){
                 <div>
                     <h1 className="dash-header">{project.name}</h1>
                     <p>{project.desc}</p>
+                    <div className="dash-grid">
+                        {/* First check if issues exist, then map over them */}
+                        {project.issues && project.issues.map((issue) => (
+                            <div key={issue.id} className="dash-card">
+                                <h3>{issue.title}</h3>
+                                <p>{issue.status} - {issue.priority}</p>
+                     </div>
+    ))}
+</div>
+
                 </div>
             ) : (
                 <h1>Loading...</h1>
             )}
+            <div className="dash-card" style={{ marginTop: '40px' }}>
+                <h3>Create New Issue</h3>
+                <form>
+                    <input 
+                        type="text" 
+                        placeholder="Issue Title" 
+                        style={{ width: '100%', padding: '10px', marginBottom: '10px' }}
+                    />
+                    <textarea 
+                        placeholder="Issue Description" 
+                        style={{ width: '100%', padding: '10px', marginBottom: '10px', minHeight: '80px' }}
+                    />
+                    <button type="submit" style={{ padding: '10px 20px', background: '#eab308', border: 'none', borderRadius: '5px', cursor: 'pointer', fontWeight: 'bold' }}>
+                        Submit Issue
+                    </button>
+                </form>
+            </div>
         </div>
     );
 
