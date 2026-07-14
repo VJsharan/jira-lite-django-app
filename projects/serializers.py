@@ -8,7 +8,6 @@ class IssueSerializer(serializers.ModelSerializer):
         fields = '__all__'
         read_only_fields = ['reporter']
 class ProjectSerializer(serializers.ModelSerializer):
-    issues = IssueSerializer(many=True, read_only=True)
     class Meta:
         model = Project
         fields = '__all__'

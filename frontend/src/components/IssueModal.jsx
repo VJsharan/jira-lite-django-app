@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import api from '../api';
 
-function IssueModal({ projects, onClose }) {
+function IssueModal({ projects, onClose, onSuccess }) {
     const [projectId, setProjectId] = useState("");
     const [title, setTitle] = useState("");
     const [desc, setDesc] = useState("");
@@ -21,7 +21,7 @@ function IssueModal({ projects, onClose }) {
                 headers: { Authorization: `Bearer ${token}` }
             });
             onClose();
-            window.location.reload();
+            onSuccess();
         }
         catch(error){
             alert('Failed to create issue: ' + error.message);

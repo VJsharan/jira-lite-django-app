@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import api from '../api';
 
-function ProjectModal({ onClose }) {
+function ProjectModal({ onClose, onSuccess }) {
     // 1. The Notebooks
     const [name, setName] = useState("");
     const [desc, setDesc] = useState("");
@@ -17,7 +17,7 @@ function ProjectModal({ onClose }) {
             headers: { Authorization: `Bearer ${token}` }
         });
         onClose();
-        window.location.reload();
+        onSuccess();
     }
     catch(error){
         alert('Failed to create issue: ' + error.message);

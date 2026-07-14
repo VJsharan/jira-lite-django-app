@@ -55,6 +55,46 @@ function Dashboard() {
         localStorage.removeItem('access_key');
         localStorage.removeItem('refresh_key');
         navigate('/login');
+    }
+    const updateIssueStatus = async (issue_id, status) => {
+        try {
+            const token = localStorage.getItem('access_key');
+            // Notice we use PATCH, and we point it at the specific issue ID!
+            await api.patch(`issues/${issue_id}/`, {
+                status: status
+            }, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+            
+            // Refresh the issues to show the new status!
+            fetchIssues();
+            
+        } catch (error) {
+            alert("Failed to update status");
+            console.error(error);
+        }
+    }; 
+
+    const deleteIssue = async (issue_id) => {
+        // Add a safety check so users don't accidentally click it!
+        const confirmDelete = window.confirm("Are you sure you want to delete this issue?");
+        if (!confirmDelete) return;
+
+        try {
+            const token = localStorage.getItem('access_key');
+            
+            // Notice we use api.delete instead of api.patch!
+            await api.delete(`issues/${issue_id}/`, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+            
+            // Instantly refresh the dashboard so the card vanishes!
+            fetchIssues();
+            
+        } catch (error) {
+            alert("Failed to delete issue");
+            console.error(error);
+        }
     };
     return(
         <div className="dash-container">
@@ -85,9 +125,16 @@ function Dashboard() {
                         
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                             <h3 style={{ margin: '0 0 10px 0' }}>{issue.title}</h3>
-                            <span style={{ fontSize: '12px', padding: '4px 8px', background: '#f1f5f9', borderRadius: '12px', fontWeight: 'bold' }}>
-                                {issue.status}
-                            </span>
+                                                        <select 
+                                value={issue.status}
+                                onChange={(e) => updateIssueStatus(issue.id, e.target.value)}
+                                style={{ fontSize: '12px', padding: '4px 8px', background: '#f1f5f9', borderRadius: '12px', fontWeight: 'bold', border: 'none', cursor: 'pointer' }}
+                            >
+                                <option value="OPEN">OPEN</option>
+                                <option value="IN_PROGRESS">IN PROGRESS</option>
+                                <option value="CLOSED">CLOSED</option>
+                            </select>
+
                         </div>
                         
                         <p style={{ marginBottom: '15px' }}>{issue.desc}</p>
@@ -100,12 +147,22 @@ function Dashboard() {
                             </span>
                         </div>
                         
+                        {/* THE NEW DELETE BUTTON */}
+                        <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '15px' }}>
+                            <button 
+                                onClick={() => deleteIssue(issue.id)}
+                                style={{ padding: '4px 8px', background: 'transparent', color: '#ef4444', border: '1px solid #ef4444', borderRadius: '5px', cursor: 'pointer', fontSize: '12px', fontWeight: 'bold' }}
+                            >
+                                Delete
+                            </button>
+                        </div>
+                        
                     </div>
-                ))}
+                ))} 
             </div>
 
-            {isModalOpen && <IssueModal projects={projects} onClose = {() =>setIsModalOpen(false)}/>}
-            {isProjectModalOpen && <ProjectModal onClose={() => setIsProjectModalOpen(false)} />}
+            {isModalOpen && <IssueModal projects={projects} onClose={() => setIsModalOpen(false)} onSuccess={fetchIssues} />}
+            {isProjectModalOpen && <ProjectModal onClose={() => setIsProjectModalOpen(false)} onSuccess={fetchProjects} />}
             <button 
             className="fab-button"
             onClick={() => setIsModalOpen(!isModalOpen)}>
