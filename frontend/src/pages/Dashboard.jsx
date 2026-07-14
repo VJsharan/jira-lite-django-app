@@ -154,10 +154,16 @@ function Dashboard() {
                         <p style={{ marginBottom: '15px' }}>{issue.desc}</p>
                         
                         {/* Notice how we can use project_name here because of our Django Serializer! */}
-                        <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px', color: '#64748b' }}>
-                            <span><strong>Project:</strong> {issue.project_name}</span>
-                            <div><strong>Reporter:</strong> {issue.reporter_name}</div>
-                            <div><strong>{new Date(issue.created_at).toLocaleDateString()}</strong></div>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', fontSize: '12px', color: '#64748b' }}>
+                            
+                            {/* Left Side: Metadata Stack */}
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                                <span><strong>Project:</strong> {issue.project_name}</span>
+                                <span><strong>Reporter:</strong> {issue.reporter_name}</span>
+                                <span><strong>Date Created:</strong> {new Date(issue.created_at).toLocaleDateString()}</span>
+                            </div>
+
+                            {/* Right Side: Priority Badge */}
                             <div style={{ 
                                 display: 'flex', 
                                 alignItems: 'center', 
