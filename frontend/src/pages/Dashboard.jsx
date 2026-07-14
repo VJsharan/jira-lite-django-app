@@ -97,8 +97,22 @@ function Dashboard() {
         }
     };
     return(
-        <div className="dash-container">
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+        <div className="dash-container" style={{ padding: 0 }}>
+    
+            {/* The Frosted Glass Header */}
+            <div style={{ 
+                display: 'flex', 
+                justifyContent: 'space-between', 
+                alignItems: 'center', 
+                padding: '20px 40px',
+                marginBottom: '20px',
+                position: 'sticky',
+                top: 0,
+                zIndex: 10,
+                background: 'rgba(255, 255, 255, 0.7)',
+                backdropFilter: 'blur(10px)',
+                borderBottom: '1px solid rgba(0,0,0,0.05)'
+            }}>
                 <h1 className="dash-header" style={{ margin: 0 }}>Jira-Lite Dashboard</h1>
                 
                 {/* Wrap the buttons in a div so they sit next to each other */}
@@ -117,7 +131,8 @@ function Dashboard() {
                         Logout
                     </button>
                 </div>
-            </div>    
+            </div> 
+  
            
             <div className="dash-grid">
                 {issues.map((issue) => (
@@ -142,9 +157,26 @@ function Dashboard() {
                         {/* Notice how we can use project_name here because of our Django Serializer! */}
                         <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px', color: '#64748b' }}>
                             <span><strong>Project:</strong> {issue.project_name}</span>
-                                    <span style={{ color: issue.priority === 'HIGH' ? '#ef4444' : issue.priority === 'LOW' ? '#22c55e' : '#64748b' }}>
-                                <strong>Priority:</strong> {issue.priority}
-                            </span>
+                            <div style={{ 
+                                display: 'flex', 
+                                alignItems: 'center', 
+                                gap: '6px',
+                                background: issue.priority === 'HIGH' ? '#fee2e2' : issue.priority === 'LOW' ? '#dcfce7' : issue.priority === 'MEDIUM' ? '#fef9c3' : '#f1f5f9',
+                                padding: '4px 8px',
+                                borderRadius: '12px',
+                                fontSize: '12px',
+                                fontWeight: 'bold',
+                                color: issue.priority === 'HIGH' ? '#ef4444' : issue.priority === 'LOW' ? '#22c55e' : issue.priority === 'MEDIUM' ? '#ca8a04' : '#64748b'
+                            }}>
+                                {/* The Status Dot */}
+                                <div style={{
+                                    width: '8px',
+                                    height: '8px',
+                                    borderRadius: '50%',
+                                    background: issue.priority === 'HIGH' ? '#ef4444' : issue.priority === 'LOW' ? '#22c55e' : issue.priority === 'MEDIUM' ? '#ca8a04' : '#64748b'
+                                }} />
+                                {issue.priority}
+                            </div>
                         </div>
                         
                         {/* THE NEW DELETE BUTTON */}

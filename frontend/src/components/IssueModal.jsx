@@ -6,7 +6,7 @@ function IssueModal({ projects, onClose, onSuccess }) {
     const [projectId, setProjectId] = useState("");
     const [title, setTitle] = useState("");
     const [desc, setDesc] = useState("");
-    const [priority, setPriority] = useState("");
+    const [priority, setPriority] = useState("LOW");
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
