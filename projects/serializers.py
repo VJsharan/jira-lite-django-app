@@ -3,6 +3,7 @@ from .models import Project, Issue, Comment
 
 class IssueSerializer(serializers.ModelSerializer):
     project_name = serializers.CharField(source='project.name', read_only=True)
+    reporter_name = serializers.CharField(source='reporter.username', read_only=True)
     class Meta:
         model = Issue
         fields = '__all__'

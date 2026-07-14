@@ -140,7 +140,7 @@ function Dashboard() {
                         
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                             <h3 style={{ margin: '0 0 10px 0' }}>{issue.title}</h3>
-                                                        <select 
+                            <select 
                                 value={issue.status}
                                 onChange={(e) => updateIssueStatus(issue.id, e.target.value)}
                                 style={{ fontSize: '12px', padding: '4px 8px', background: '#f1f5f9', borderRadius: '12px', fontWeight: 'bold', border: 'none', cursor: 'pointer' }}
@@ -149,7 +149,6 @@ function Dashboard() {
                                 <option value="IN_PROGRESS">IN PROGRESS</option>
                                 <option value="CLOSED">CLOSED</option>
                             </select>
-
                         </div>
                         
                         <p style={{ marginBottom: '15px' }}>{issue.desc}</p>
@@ -157,6 +156,8 @@ function Dashboard() {
                         {/* Notice how we can use project_name here because of our Django Serializer! */}
                         <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px', color: '#64748b' }}>
                             <span><strong>Project:</strong> {issue.project_name}</span>
+                            <div><strong>Reporter:</strong> {issue.reporter_name}</div>
+                            <div><strong>{new Date(issue.created_at).toLocaleDateString()}</strong></div>
                             <div style={{ 
                                 display: 'flex', 
                                 alignItems: 'center', 
